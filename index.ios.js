@@ -27,7 +27,7 @@ class RNSwiftCheckNetwork extends Component {
       };
   }
 
-  check(){
+  checkNetwork(){
      var self = this;
      CheckNetwork.isConnectedToNetwork(function(con){
         console.log("result: "+con)
@@ -41,15 +41,13 @@ class RNSwiftCheckNetwork extends Component {
              });
 
         }
-     });
-        
-      
+     });     
   }
 
   componentDidMount(){
 
     var self = this;
-      self.check();
+      self.checkNetwork();
   }
   render() {
   var self = this;
