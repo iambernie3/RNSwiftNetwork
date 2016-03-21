@@ -11,22 +11,56 @@ import React, {
   View
 } from 'react-native';
 
+var {
+
+    CheckNetwork
+} = require('NativeModules');
+
+
+
 class RNSwiftCheckNetwork extends Component {
+
+  constructor(props){
+      super(props);
+      this.state = {
+        isConnected: '' 
+      };
+  }
+
+  check(){
+     var self = this;
+     CheckNetwork.isConnectedToNetwork(function(con){
+        console.log("result: "+con)
+        if (con){
+             self.setState({
+                isConnected: 'true'
+             });
+        }else{
+              self.setState({
+                isConnected: 'false'
+             });
+
+        }
+     });
+        
+      
+  }
+
+  componentDidMount(){
+
+    var self = this;
+      self.check();
+  }
   render() {
+  var self = this;
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+            <View style={styles.container}>
+              <Text>{self.state.isConnected}</Text>
+            </View>
     );
+
+    
+          
   }
 }
 
